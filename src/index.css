@@ -1,0 +1,26 @@
+:root {
+  --backgroud-color: #121212;
+  --color: #ccc;
+}
+
+html,
+body {
+  background: var(--backgroud-color);
+  color: var(--color);
+  height: 100%;
+}
+
+.footer {
+  height: 60px;
+  text-align: center;
+}
+
+/* chrome and chromium based */
+.react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.react-horizontal-scrolling-menu--scroll-container {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

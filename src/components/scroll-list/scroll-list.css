@@ -1,0 +1,44 @@
+.react-horizontal-scrolling-menu--scroll-container {
+    gap: 0.5rem;
+}
+
+.scroll-card {
+    border: none;
+    width: 240px;
+    height: 100%;
+    background: none;
+    overflow: hidden;
+}
+
+.scroll-card-image {
+    border-radius: 12px;
+    width: 100%;
+}
+
+.scroll-card-title {
+    text-decoration: none;
+    font-size: 20px;
+    color: #ccc;
+}
+
+.scroll-card:hover {
+    opacity: 0.4;
+    transition: 0.2s linear;
+
+    .scroll-card-title {
+        color: #ddd;
+    }
+    .scroll-card-image {
+        transition: 0.2s linear;
+        scale: 1.2;
+    }
+}
+
+.scroll-arrow:hover {
+    color: #ccc;
+}
+
+.scroll-arrow:disabled {
+    display: none;
+}
+
