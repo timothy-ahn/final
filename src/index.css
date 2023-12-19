@@ -3,10 +3,21 @@
   --color: #ccc;
 }
 
+html {
+  min-height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
 html,
 body {
   background: var(--backgroud-color);
-  color: var(--color);
+  color: var(--color);  
+}
+
+#root {
   height: 100%;
 }
 
@@ -23,4 +34,9 @@ body {
 .react-horizontal-scrolling-menu--scroll-container {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.main {
+  padding: 2rem 0;
+  height: 100%;
 }

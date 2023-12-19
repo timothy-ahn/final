@@ -3,17 +3,38 @@
 }
 
 .scroll-card {
+    border-radius: 12px;
     border: none;
     width: 240px;
     height: 100%;
     background: none;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .scroll-card-image {
     border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    display: block;
+}
+
+.scroll-card-image img {
+    border-radius: 12px;
     width: 100%;
     height: 340px;
+}
+
+.scroll-card-image-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+    padding: 0.4rem 0.8rem;    
 }
 
 .scroll-card-title {
@@ -28,15 +49,18 @@
 }
 
 .scroll-card:hover {
-    opacity: 0.4;
     transition: 0.2s linear;
-
     .scroll-card-title {
         color: #ddd;
     }
-    .scroll-card-image {
+    .scroll-card-image img {
         transition: 0.2s linear;
         scale: 1.2;
+        opacity: 0.1;
+    }
+
+    .scroll-card-image-back {
+        display: block;
     }
 }
 
@@ -48,3 +72,14 @@
     display: none;
 }
 
+.scroll-card-image-back span {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.scroll-card-image-back .synopsis {
+    text-wrap: wrap;
+    max-height: 150px;
+    font-size: 0.9rem;
+}

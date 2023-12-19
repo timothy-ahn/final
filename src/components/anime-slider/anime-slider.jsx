@@ -16,14 +16,14 @@ function AnimeSlider({ title, apiCallback }) {
       .catch((err) => setError(err));
   }, [apiCallback]);
 
-  function render() {    
+  function render() {
     if (error) return <p>Failed to retrive data from server</p>;
 
     if (!animes) return <p>Loading...</p>;
-    
+
     if (animes.length > 0)
       return (
-        <ScrollMenu Header={<h2>{title}</h2>}>
+        <ScrollMenu>
           {animes.map((anime) => (
             <SliderCard key={anime.mal_id} anime={anime} />
           ))}
@@ -33,7 +33,12 @@ function AnimeSlider({ title, apiCallback }) {
     return <p>No Data</p>;
   }
 
-  return <div>{render()}</div>;
+  return (
+    <>
+      <h2>{title}</h2>
+      <div>{render()}</div>
+    </>
+  );
 }
 
 export default AnimeSlider;

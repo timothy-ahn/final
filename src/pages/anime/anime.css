@@ -1,0 +1,36 @@
+.poster {
+  display: flex;
+  justify-content: left;
+}
+
+.poster img {
+  width: 350px;
+  height: 450px;
+}
+
+.title-block {
+  background: #222;
+  padding: 1.5rem;
+}
+
+.info-col {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.info-block {
+  font-size: 14px;
+}
+
+.info-block .key {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+  .poster {
+    display: flex;
+    justify-content: center;
+  }
+}

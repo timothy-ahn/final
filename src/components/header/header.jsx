@@ -1,4 +1,5 @@
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 function Header() {
   return (
@@ -9,7 +10,9 @@ function Header() {
       data-bs-theme="dark"
     >
       <Container>
-        <Navbar.Brand href="#">MyAnimeList</Navbar.Brand>
+        <LinkContainer to="/">
+          <Navbar.Brand href="#">MyAnimeList</Navbar.Brand>
+        </LinkContainer>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
@@ -17,7 +20,9 @@ function Header() {
             style={{ maxHeight: "100px" }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Browse</Nav.Link>
+            <LinkContainer to="/">
+              <Nav.Link href="#action1">Browse</Nav.Link>
+            </LinkContainer>
             <Nav.Link href="#action2">Seasons</Nav.Link>
             <Nav.Link href="#action2">Random</Nav.Link>
           </Nav>

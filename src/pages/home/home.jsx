@@ -1,11 +1,11 @@
 import { Col, Container, Row } from "react-bootstrap";
 import AnimeSlider from "../../components/anime-slider";
 import { JikanClient } from "@tutkli/jikan-ts";
-import { buildWebStorage } from "axios-cache-interceptor";
 
 const jikanClient = new JikanClient({
-  cacheOptions: { storage: buildWebStorage(localStorage, "axios-cache:") },
+  enableLogging: true,
 });
+
 function Home() {
   function topAiring() {
     return jikanClient.anime.getAnimeSearch({
@@ -22,36 +22,33 @@ function Home() {
     return jikanClient.seasons.getSeasonNow({ limit: 5 });
   }
 
+  function recommended() {
+    return jikanClient.top.getTopAnime({ sfw: true, type: "tv", filter: "favorite", limit: 5 })
+  }
+
   return (
     <>
       <Container>
         <Row>
-          <Col xxl={12} className="mt-4">
-            <AnimeSlider
-              title="Top Airing"
-              apiCallback={topAiring}
-            ></AnimeSlider>
+          <Col xxl={12}>
+            <AnimeSlider title="Top Airing" apiCallback={topAiring} />
           </Col>
         </Row>
       </Container>
       <Container>
         <Row>
           <Col xxl={12} className="mt-4">
-            <AnimeSlider
-              title="Current Season"
-              apiCallback={currentSeason}
-            ></AnimeSlider>
+            <AnimeSlider title="Current Season" apiCallback={currentSeason}/>
           </Col>
         </Row>
       </Container>
-      {/* 
       <Container>
         <Row>
           <Col xxl={12} className="mt-4">
-            <AnimeSlider title="Recommended" items={[]}></AnimeSlider>
+            <AnimeSlider title="Users Most Favorite" apiCallback={recommended}/>
           </Col>
         </Row>
-      </Container> */}
+      </Container>
     </>
   );
 }
