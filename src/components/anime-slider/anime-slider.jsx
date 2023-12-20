@@ -2,29 +2,60 @@ import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import SliderCard from "./slider-card/slider-card";
 
 import "./anime-slider.css";
-import { useEffect, useState } from "react";
+import React from "react";
 
-function AnimeSlider({ title, apiCallback }) {
-  const [animes, setAnimes] = useState(null);
-  const [error, setError] = useState(null);
+class AnimeSlider extends React.Component {
+  state = {
+    animes: null,
+    error: null,
+  };
 
-  useEffect(() => {
-    apiCallback()
+  intervalId = null;
+
+  componentDidMount() {
+    this.runCallback();
+    this.intervalId = setInterval(() => console.log("interval happend"), 1000);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.apiCallback !== this.props.apiCallback) {
+      this.runCallback();
+    }
+  }
+
+  componentDidCatch() {
+    console.log("Error happend in component AnimeSlider");
+  }
+
+  componentWillUnmount() {
+    console.log(this.intervalId);
+    clearInterval(this.intervalId);
+  }
+
+  runCallback() {
+    this.props
+      .apiCallback()
       .then((res) => {
-        setAnimes(res.data);
+        this.setState({
+          animes: res.data,
+          error: null,
+        });
       })
-      .catch((err) => setError(err));
-  }, [apiCallback]);
+      .catch((err) =>
+        this.setState({
+          animes: null,
+          error: err,
+        })
+      );
+  }
 
-  function render() {
-    if (error) return <p>Failed to retrive data from server</p>;
-
-    if (!animes) return <p>Loading...</p>;
-
-    if (animes.length > 0)
+  getElements() {
+    if (this.state.error) return <p>Failed to retrive data from server</p>;
+    if (!this.state.animes) return <p>Loading...</p>;
+    if (this.state.animes.length > 0)
       return (
         <ScrollMenu>
-          {animes.map((anime) => (
+          {this.state.animes.map((anime) => (
             <SliderCard key={anime.mal_id} anime={anime} />
           ))}
         </ScrollMenu>
@@ -33,12 +64,14 @@ function AnimeSlider({ title, apiCallback }) {
     return <p>No Data</p>;
   }
 
-  return (
-    <>
-      <h2>{title}</h2>
-      <div>{render()}</div>
-    </>
-  );
+  render() {
+    return (
+      <>
+        <h2>{this.props.title}</h2>
+        <div>{this.getElements()}</div>
+      </>
+    );
+  }
 }
 
 export default AnimeSlider;
