@@ -83,8 +83,6 @@ function Search() {
                 className="me-2"
                 aria-label="Search"
                 defaultValue={() => searchParams.get("q")}
-                // value={search}
-                // onChange={(e) => setSearch(e.target.value)}
               />
               <Button type="submit" variant="outline-success">
                 Search
