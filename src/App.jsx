@@ -8,6 +8,10 @@ import Anime from "./pages/anime";
 import AnimeDetails from "./pages/anime/details";
 import AnimeEpisodes from "./pages/anime/episodes";
 import AnimeVideos from "./pages/anime/videos";
+import AnimeRandom from "./pages/anime-random";
+import Search from "./pages/search";
+import Seasons from "./pages/seasons";
+import Season from "./pages/season";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <NotFound />
+        element: <NotFound />,
       },
       {
         path: "anime/:id",
@@ -27,17 +31,47 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <AnimeDetails />
+            element: <AnimeDetails />,
           },
           {
             path: "episodes",
-            element: <AnimeEpisodes />
+            element: <AnimeEpisodes />,
           },
           {
             path: "videos",
-            element: <AnimeVideos />
-          }
-        ]
+            element: <AnimeVideos />,
+          },
+        ],
+      },
+      {
+        path: "random",
+        element: <AnimeRandom />,
+        children: [
+          {
+            index: true,
+            element: <AnimeDetails />,
+          },
+          {
+            path: "episodes",
+            element: <AnimeEpisodes />,
+          },
+          {
+            path: "videos",
+            element: <AnimeVideos />,
+          },
+        ],
+      },
+      {
+        path: "search",
+        element: <Search />,
+      },
+      {
+        path: "seasons",
+        element: <Seasons />
+      },
+      {
+        path: "seasons/:season",
+        element: <Season />
       }
     ],
   },

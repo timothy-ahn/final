@@ -2,7 +2,7 @@ import { JikanClient } from "@tutkli/jikan-ts";
 import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import { useOutletContext } from "react-router-dom";
-import "./anime-videos.css"
+import "./anime-videos.css";
 
 const jikanClient = new JikanClient({
   enableLogging: true,
@@ -43,11 +43,22 @@ function AnimeVideos() {
         {videos.music_videos.length === 0 ? (
           <p>No data</p>
         ) : (
-          <div className="d-flex">
+          <div className="d-flex gap-2 flex-wrap justify-content-md-between justify-content-center">
             {videos.music_videos.map((video) => {
               return (
                 <div className="video-block" key={video.video.youtube_id}>
-                  <img src={video.video.images.image_url} alt={video.title} />
+                  <a
+                    className="d-inline-block"
+                    href={video.video.embed_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src={video.video.images.medium_image_url}
+                      alt={video.title}
+                    />
+                  </a>
+                  <div className="video-block-title">{video.title}</div>
                 </div>
               );
             })}
@@ -59,12 +70,20 @@ function AnimeVideos() {
         {videos.promo.length === 0 ? (
           <p>No data</p>
         ) : (
-          <div className="d-flex gap-2 flex-wrap justify-content-between">
+          <div className="d-flex gap-2 flex-wrap justify-content-md-between justify-content-center">
             {videos.promo.map((promo) => {
               return (
                 <div className="video-block" key={promo.trailer.youtube_id}>
-                  <a className="d-inline-block" href={promo.trailer.embed_url} target="_blank" rel="noreferrer">
-                    <img src={promo.trailer.images.medium_image_url} alt={promo.title} />
+                  <a
+                    className="d-inline-block"
+                    href={promo.trailer.embed_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src={promo.trailer.images.medium_image_url}
+                      alt={promo.title}
+                    />
                   </a>
                   <div className="video-block-title">{promo.title}</div>
                 </div>

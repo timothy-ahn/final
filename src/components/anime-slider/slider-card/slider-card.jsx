@@ -3,15 +3,15 @@ import { nFormatter } from "../../../utils";
 
 function SliderCard({ anime }) {
   const title =
-    anime.titles.find((t) => t.type === "English")?.title ??
-    anime.titles.find((t) => t.type === "Default").title;
+    anime.titles?.find((t) => t.type === "English")?.title ??
+    anime.titles?.find((t) => t.type === "Default").title ?? "";
   return (
     <div className="scroll-card">
       <div className="scroll-card-body">
         <div className="scroll-card-image">
           <img src={`${anime.images.webp.large_image_url}`} alt={title} />
           <div className="scroll-card-image-back">
-            <Link to={`anime/${anime.mal_id}`} className="text-decoration-none text-white">
+            <Link to={`/anime/${anime.mal_id}`} className="text-decoration-none text-white">
               <p className="text-break fw-bold fs-6">{title}</p>
               <span className="score">
                 <b className="me-1">Score:</b> {anime.score}
@@ -28,7 +28,7 @@ function SliderCard({ anime }) {
                 ({nFormatter(anime.scored_by)})
               </span>
               <span>
-                <b className="me-1">Rating:</b> {anime.rating.split(" ")[0]}
+                <b className="me-1">Rating:</b> {anime.rating?.split(" ")[0]}
               </span>
               <span>
                 <b className="me-1">Episodes:</b> {anime.episodes ?? "-"}
@@ -41,7 +41,7 @@ function SliderCard({ anime }) {
           </div>
         </div>
         <div className="text-center">
-          <Link to={`anime/${anime.mal_id}`} className="scroll-card-title">
+          <Link to={`/anime/${anime.mal_id}`} className="scroll-card-title">
             {title}
           </Link>
         </div>

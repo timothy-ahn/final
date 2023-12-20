@@ -1,7 +1,20 @@
+import { useState } from "react";
 import { Button, Container, Form, Nav, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (search.length > 0) {      
+      navigate(`/search?q=${search}`);      
+      setSearch("");
+    }
+  }
+
   return (
     <Navbar
       expand="lg"
@@ -21,17 +34,26 @@ function Header() {
             navbarScroll
           >
             <LinkContainer to="/">
-              <Nav.Link href="#action1">Browse</Nav.Link>
+              <Nav.Link>Browse</Nav.Link>
             </LinkContainer>
-            <Nav.Link href="#action2">Seasons</Nav.Link>
-            <Nav.Link href="#action2">Random</Nav.Link>
+            <LinkContainer to="/seasons">
+              <Nav.Link>Seasons</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/random">
+              <Nav.Link>Random</Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/search">
+              <Nav.Link>Search</Nav.Link>
+            </LinkContainer>
           </Nav>
-          <Form className="d-flex">
+          <Form className="d-flex" onSubmit={handleSubmit}>
             <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
             <Button variant="outline-success">Search</Button>
           </Form>
